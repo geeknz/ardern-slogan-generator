@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Jacinda Ardern Slogan Generator</title>
+		<script src="//cdn.rawgit.com/davidjbradshaw/iframe-resizer/v3.5.5/js/iframeResizer.contentWindow.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+		<script>
+			(function(angular, moment) {
+
+				var app = angular.module('app', []);
+
+				app.controller('mainCtrl', function() {
+					var vm = this;
+
+					vm.dob = moment()
+						.add(-30, 'years')
+						.toDate();
+
+					var start = {
+						'A': 'I am positive we will',
+						'B': 'Labour is united that we\'ll',
+						'C': 'I am relentless about ensuring we',
+						'D': 'I am absolutely going to',
+						'E': 'Our generation has to',
+						'F': 'This is the time to',
+						'G': 'Let\'s',
+						'H': 'Our vision will see us',
+						'I': 'Labour has bold policies to',
+						'J': 'Young people everywhere will',
+						'K': 'Now is the time to',
+						'L': 'I am ready to',
+						'M': 'The next Labour government will',
+						'N': 'I will never give up the fight to',
+						'O': 'We must share in our common values to',
+						'P': 'We will boldly and courageously',
+						'Q': 'I am very proud to say that we will',
+						'R': 'Our movement is determined to',
+						'S': 'We are launching a positive campaign to',
+						'T': 'The legacy of this generation will be to',
+						'U': 'I am inspired by the fact that we will',
+						'V': 'We won\'t give up until we',
+						'W': 'Labour are ready to',
+						'X': 'Comrades, we must make sure we',
+						'Y': 'I have a position vision to',
+						'Z': 'Yes, we are going to'
+					};
+
+					var middle = [
+						'stand up to',
+						'fight',
+						'ban',
+						'tax',
+						'eradicate',
+						'end',
+						'do something about',
+						'stop',
+						'say no to',
+						'bring social justice to',
+						'eliminate',
+						'change'
+					];
+
+					var end = [
+						'child poverty',
+						'neoliberalism',
+						'racism',
+						'homophobia',
+						'gender inquality',
+						'the National Party',
+						'asset sales',
+						'Donald Trump',
+						'the rich',
+						'capitalism',
+						'immigration',
+						'unemployment',
+						'climate change',
+						'crime',
+						'low productivity',
+						'farmers',
+						'carbon emissions',
+						'the Australian government',
+						'dirty politics',
+						'negative campaigning',
+						'the justice system',
+						'Winston Peters',
+						'the regugee crisis',
+						'male privilege',
+						'white privilege',
+						'property speculators',
+						'traffic in Auckland',
+						'the use of water',
+						'income ineuality',
+						'homelessness',
+						'people with Chinese sounding surnames'
+					];
+
+					vm.generate = function() {
+						var date = moment(vm.dob);
+						var month = date.format('M');
+						var day = date.format('D');
+
+						vm.slogan = start[vm.name[0].toUpperCase()]
+							+ ' ' + middle[month - 1]
+							+ ' ' + end[day - 1] + '.';
+					};
+				});
+
+			})(angular, moment);
+		</script>
+	</head>
+	<body ng-app="app" ng-controller="mainCtrl as vm">
+		<form name="main" ng-submit="vm.generate()">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3>Jacinda Ardern Slogan Generator</h3>
+				</div>
+				<div class="panel-body">
+					<div class="form-group">
+						<label for="name">
+							Name
+						</label>
+						<input id="name" class="form-control" type="text" required ng-model="vm.name">
+					</div>
+					<div class="form-group">
+						<label for="dob">
+							Date of Birth
+						</label>
+						<input id="dob" class="form-control" type="date" required ng-model="vm.dob">
+					</div>
+					<div>
+						<strong>{{vm.slogan}}</strong>
+					</div>
+				</div>
+				<div class="panel-footer">
+					<button type="submit" class="btn btn-default">Generate</button>
+				</div>
+			</div>
+		</form>
+	</body>
+</html>
