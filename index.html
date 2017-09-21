@@ -18,34 +18,34 @@
 						.add(-30, 'years')
 						.toDate();
 
-					var start = {
-						'A': 'I am positive we will',
-						'B': 'Labour is united that we\'ll',
-						'C': 'I am relentless about ensuring we',
-						'D': 'I am absolutely going to',
-						'E': 'Our generation has to',
-						'F': 'This is the time to',
-						'G': 'Let\'s',
-						'H': 'Our vision will see us',
-						'I': 'Labour has bold policies to',
-						'J': 'Young people everywhere will',
-						'K': 'Now is the time to',
-						'L': 'I am ready to',
-						'M': 'The next Labour government will',
-						'N': 'I will never give up the fight to',
-						'O': 'We must share in our common values to',
-						'P': 'We will boldly and courageously',
-						'Q': 'I am very proud to say that we will',
-						'R': 'Our movement is determined to',
-						'S': 'We are launching a positive campaign to',
-						'T': 'The legacy of this generation will be to',
-						'U': 'I am inspired by the fact that we will',
-						'V': 'We won\'t give up until we',
-						'W': 'Labour are ready to',
-						'X': 'Comrades, we must make sure we',
-						'Y': 'I have a position vision to',
-						'Z': 'Yes, we are going to'
-					};
+					var start = [
+						'I am positive we will',
+						'Labour is united that we\'ll',
+						'I am relentless about ensuring we',
+						'I am absolutely going to',
+						'Our generation has to',
+						'This is the time to',
+						'Let\'s',
+						'Our vision will see us',
+						'Labour has bold policies to',
+						'Young people everywhere will',
+						'Now is the time to',
+						'I am ready to',
+						'The next Labour government will',
+						'I will never give up the fight to',
+						'We must share in our common values to',
+						'We will boldly and courageously',
+						'I am very proud to say that we will',
+						'Our movement is determined to',
+						'We are launching a positive campaign to',
+						'The legacy of this generation will be to',
+						'I am inspired by the fact that we will',
+						'We won\'t give up until we',
+						'Labour are ready to',
+						'Comrades, we must make sure we',
+						'I have a position vision to',
+						'Yes, we are going to'
+					];
 
 					var middle = [
 						'stand up to',
@@ -101,7 +101,15 @@
 						var month = date.format('M');
 						var day = date.format('D');
 
-						vm.slogan = start[vm.name[0].toUpperCase()]
+						var name = vm.name[0].toUpperCase();
+						name = name.charCodeAt(0);
+						name = name - 65;
+						if (0 > name) {
+							name = name + 127;
+						}
+						name = name % 26;
+
+						vm.slogan = start[name]
 							+ ' ' + middle[month - 1]
 							+ ' ' + end[day - 1] + '.';
 					};
